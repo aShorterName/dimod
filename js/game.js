@@ -53,15 +53,15 @@ function tickWithoutTS(diff) {
 	else if (hasCollapseMilestone(9) && !nerfActive("noRockets"))
 		player.rockets = player.rockets.plus(tmp.rockets.layer.gain.times(diff.div(100)));
 
-	if (tmp.ach[96].has && !nerfActive("noCadavers"))
+	if ((tmp.ach[96].has||player.tr.upgrades.includes(38)) && !nerfActive("noCadavers"))
 		player.collapse.cadavers = player.collapse.cadavers.plus(tmp.collapse.layer.gain.times(diff));
 	else if (tmp.inf.upgs.has("2;4") && !nerfActive("noCadavers"))
 		player.collapse.cadavers = player.collapse.cadavers.plus(tmp.collapse.layer.gain.times(diff.div(100)));
-	if (tmp.ach[97].has && !nerfActive("noLifeEssence"))
+	if (tmp.ach[97].has && !nerfActive("noLifeEssence") && player.collapse.unl)
 		player.collapse.lifeEssence = player.collapse.lifeEssence.plus(
 			player.collapse.cadavers.times(tmp.collapse.sacEff).max(1).times(diff)
 		);
-	else if (tmp.inf.upgs.has("5;3") && !nerfActive("noLifeEssence"))
+	else if (tmp.inf.upgs.has("5;3") && !nerfActive("noLifeEssence") && player.collapse.unl)
 		player.collapse.lifeEssence = player.collapse.lifeEssence.plus(
 			player.collapse.cadavers.times(tmp.collapse.sacEff).max(1).times(diff.div(10))
 		);

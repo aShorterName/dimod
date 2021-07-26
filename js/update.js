@@ -20,6 +20,7 @@ function updateTemp() {
 	updateTempMisc();
 	updateTempTimeSpeed();
 	updateTempRea();
+	updateTempEternity();
 	if (modeActive("extreme")) {
 		updateTempRankCheap();
 		updateTempFurnace();
