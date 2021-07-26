@@ -32,6 +32,9 @@ const TABBTN_SHOWN = {
 	pathogens: function () {
 		return player.pathogens.unl;
 	},
+	eternity: function () {
+		return player.pathogens.unl
+	},
 	dc: function () {
 		return player.dc.unl;
 	},

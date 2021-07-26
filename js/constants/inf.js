@@ -1,5 +1,5 @@
 // Infinity
-const INF_UNL = new ExpantaNum("1e1e1e308").times(DISTANCES.uni);
+const INF_UNL = new ExpantaNum("1e1e308").times(DISTANCES.uni);
 const INF_UPGS = {
 	rows: 10,
 	cols: 10,
@@ -761,7 +761,7 @@ const STADIUM_DESCS = {
 		"You do not gain Time Cubes"
 	],
 	eternity: [
-		"Time Speed does nothing",
+		"Time Speed does nothing\n\nRocket effect is disabled above 1",
 		"Dark Flow is always 0x",
 		"Pathogen Upgrades are 90% weaker",
 		"Scaled Tier scaling is 500% stronger",
@@ -789,7 +789,7 @@ const STADIUM_REWARDS = {
 	spaceon: "inf1;1 is stronger based on your Rockets.",
 	solaris: "Superscaled Rank scaling starts later based on your Cadavers.",
 	infinity: "The Rocket Fuel effect is twice as powerful.",
-	eternity: "Endorsements & Ascension Power make Ranks boost Time Speed.",
+	eternity: "Endorsements & Ascension Power make Ranks boost Time Speed.<br>Automate Rocket eternal amplifiers.<br>Rocket effect softcap starts *2 later",
 	reality: "Time Cubes are thrice as powerful.",
 	drigganiz: "Pathogen Upgrades are 0.75% stronger for every achievement you have.",
 	effects: {
@@ -869,7 +869,7 @@ const STADIUM_GOALS = {
 		new ExpantaNum("1e1200").times(DISTANCES.uni)
 	],
 	eternity: [
-		new ExpantaNum("1e260").times(DISTANCES.uni),
+		new ExpantaNum("1e7.5e4").times(DISTANCES.uni),
 		new ExpantaNum("1e250").times(DISTANCES.uni),
 		new ExpantaNum("1e295").times(DISTANCES.uni),
 		new ExpantaNum(Number.MAX_VALUE).times(DISTANCES.uni),

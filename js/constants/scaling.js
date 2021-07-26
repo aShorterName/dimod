@@ -14,6 +14,7 @@ const SCALING_STARTS = {
 		spectralGems: new ExpantaNum(5),
 		dervBoost: new ExpantaNum(6),
 		photons: new ExpantaNum(15),
+		rea: new ExpantaNum(100)
 	},
 	superscaled: {
 		rank: new ExpantaNum(100),
@@ -57,6 +58,9 @@ const SCALING_RES = {
 	},
 	rf: function (n = 0) {
 		return player.rf;
+	},
+	rea: function (n = 0) {
+		return player.rea;
 	},
 	fn: function (n = 0) {
 		return modeActive("extreme") ? player.furnace.upgrades[n - 1] : new ExpantaNum(0);

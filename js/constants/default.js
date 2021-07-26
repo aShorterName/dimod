@@ -81,6 +81,9 @@ const DEFAULT_START = {
 			15: new ExpantaNum(0)
 		}
 	},
+	eternity: {
+		tab: "alpha"
+	},
 	dc: {
 		unl: false,
 		matter: new ExpantaNum(0),

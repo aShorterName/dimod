@@ -89,7 +89,7 @@ const TR_UPGS = {
 		cost: function(){
 			return new ExpantaNum(2e5)
 		},
-		desc: "Rocket gain is increased by 10% for every OoM of Time Cubes <span class=\"strikeThrough\">(softcaps after a while)</span>.",
+		desc() {return "Rocket gain is increased by "+showNum(tr10Base().sub(1).mul(100))+"% for every OoM of Time Cubes <span class=\"strikeThrough\">(softcaps after a while)</span>."},
 		current: function () {
 			return tr10Eff();
 		},
@@ -339,6 +339,41 @@ const TR_UPGS = {
 			return new ExpantaNum(modeActive("extreme+hikers_dream") ? "1e1500" : "1e1350")
 		}, 
 		desc: "Furnace Upgrade 4 works in Furnace Challenges, but it is weaker in them." 
+	},
+	36: { 
+		cost: function(){
+			return new ExpantaNum("1e100")
+		}, 
+		desc: "Rocket's first log is half a log <br><b class='strikeThrough'>A log is a log, you can't say it's only a half, well actu- ally, i have no idea how it works, don't ask</b>",
+		mod: true,
+	},
+	37: { 
+		cost: function(){
+			return new ExpantaNum("1e140")
+		}, 
+		desc: "The 10th time reversal upgrade is raised by the first pathogen upgrade.",
+		mod: true,
+	},
+	38: { 
+		cost: function(){
+			return new ExpantaNum("1e170")
+		}, 
+		desc: "Passively gain 100% of cadavers on reset and get ^1.5 more of them.",
+		mod: true,
+	},
+	39: { 
+		cost: function(){
+			return new ExpantaNum("1e190")
+		}, 
+		desc: "Rocket fuel effect is a LOT stronger and also increases rocket effect softcap start at a reduced rate.",
+		mod: true,
+	},
+	40: { 
+		cost: function(){
+			return new ExpantaNum("1e190")
+		}, 
+		desc: "Rocket effect is doubled, after all softcaps.<br><b class='reality'>The final push you need.</b><br><b class='spaceon'>I wonder what this one will do.</b>",
+		mod: true,
 	},
 };
 const TR_UPG_AMT = Object.keys(TR_UPGS).length;

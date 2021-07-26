@@ -118,6 +118,9 @@ const AUTOMATORS = {
 	plasma: function() {
 		return hasMltMilestone(8) && modeActive("extreme");
 	},
+	"rocket eternal accelerator": function() {
+		return player.inf.stadium.completions.includes("eternity");
+	},
 };
 
 const AUTOMATOR_BORDER = {
@@ -145,6 +148,7 @@ const AUTOMATOR_BORDER = {
 	multiverse_runs: "#837eed",
 	magma: "#4d3636",
 	plasma: "#49364d",
+	"rocket eternal accelerator": "#ff0000",
 }
 
 const AUTOMATOR_X = {
