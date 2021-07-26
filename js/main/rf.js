@@ -19,6 +19,10 @@ function getFuelEff() {
 		.logBase(2)
 		.plus(1)
 		.pow(0.05);
+	if (player.tr.upgrades.includes(39)) {
+		eff = trf.plus(1)
+		.pow(0.1);
+	}
 	if (tmp.inf ? (tmp.inf.stadium.completed("infinity") && mltRewardActive(1)) : false) eff = eff.max(trf.plus(1).pow(0.1))
 	if (modeActive("hard")) eff = eff.sub(0.02);
 	if (modeActive('easy')) eff = eff.plus(0.012);

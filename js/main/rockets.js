@@ -11,13 +11,17 @@ function getRocketEffectSoftcapStart() {
 	if (modeActive("hard")) sc = sc.sub(0.5);
 	if (modeActive("easy")) sc = sc.plus(0.5);
 	if (tmp.pathogens && player.pathogens.unl) sc = sc.plus(tmp.pathogens[8].eff());
+	if (player.inf.stadium.completions.includes("eternity")) sc=sc.mul(2)
+	if (player.tr.upgrades.includes(39)) sc = sc.mul(getFuelEff().sqrt())
 	return sc
 }
 
 function getRocketEffect() {
 	let r = player.rockets;
 	if (extremeStadiumActive("nullum", 4)) r = ExpantaNum.pow(10, r.log10().times(0.75))
-	if (r.gte(10)) r = r.log10().times(10);
+	if (r.gte(10)) {
+		if (!player.tr.upgrades.includes(36)) {r = r.log10().times(10)} else {r = r.iteratedlog(10,0.5)}
+	}
 	if (player.rf.gt(0)) r = r.plus(getFuelEff2());
 	let eff = r.plus(1).logBase(3).times(getFuelEff());
 	if (modeActive("easy")) eff = eff.times(2).plus(1);
@@ -27,7 +31,10 @@ function getRocketEffect() {
 	if (tmp.inf) if (tmp.inf.upgs.has("9;2")) eff = eff.plus(INF_UPGS.effects["9;2"]());
 	if (tmp.inf) if (tmp.inf.upgs.has("6;10")) eff = eff.times(16)
 	if (player.elementary.foam.unl && tmp.elm) eff = eff.times(tmp.elm.qf.boost20)
-	if (tmp.inf) if (tmp.inf.stadium.completed("reality") && mltRewardActive(1)) eff = eff.times(8);
+	if (tmp.inf) {if (tmp.inf.stadium.completed("reality") && mltRewardActive(1)) eff = eff.times(8);
+	if (tmp.inf.stadium.active("eternity", 1)) eff=new ExpantaNum(0)
+	}
+	if (player.tr.upgrades.includes(40)) eff=eff.mul(2)
 	return eff.add(1);
 }
 

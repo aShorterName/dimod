@@ -179,7 +179,7 @@ function updateRocketsHTML(){
 		tmp.el.rfEff.setTxt(showNum(getFuelEff().sub(1).times(100)));
 		tmp.el.rfName.setTxt(getScalingName("rf") + "Rocket Fuel");
 		tmp.el.rf2.setTxt(showNum(getFuelEff2()));
-		tmp.el.rea.setTxt(showNum(player.rea))
+		tmp.el.rea.setTxt(showNum(player.rea) + " " + getScalingName("rea"))
 		tmp.el.reaReq.setTxt(showNum(tmp.rea.req))
 		tmp.el.reaReset.setClasses({ btn: true, locked: !tmp.rea.can, rainbow: tmp.rea.can });
 		tmp.el.reaEff.setTxt(showNum(getReaEff()))
@@ -298,6 +298,7 @@ function updateTimeReversalHTML(){
 		for (let i = 1; i <= TR_UPG_AMT; i++) {
 			let upg = TR_UPGS[i];
 			let desc = upg.desc;
+			if ((typeof upg.desc)=="function") desc = upg.desc()
 			if (!tr2Pow().eq(1) && i == 2) desc += "<span class='grossminitxt'>(^" + showNum(tr2Pow()) + ")</span>";
 			if (!tr11Pow().eq(1) && i == 11)
 				desc += "<span class='grossminitxt'>(^" + showNum(tr11Pow()) + ")</span>";
@@ -307,8 +308,9 @@ function updateTimeReversalHTML(){
 			tmp.el["tr" + i].setClasses({
 				btn: true,
 				locked: !player.tr.upgrades.includes(i) && player.tr.cubes.lt(upg.cost()),
-				bought: player.tr.upgrades.includes(i),
-				rt: !player.tr.upgrades.includes(i) && player.tr.cubes.gte(upg.cost())
+				bought: player.tr.upgrades.includes(i)  && !upg.mod,
+				rt: !player.tr.upgrades.includes(i) && player.tr.cubes.gte(upg.cost()),
+				rainbow: player.tr.upgrades.includes(i) && upg.mod
 			});
 		}
 		tmp.el.trRow3.setDisplay(player.dc.unl || tmp.inf.upgs.has("1;4"));
@@ -316,6 +318,7 @@ function updateTimeReversalHTML(){
 		tmp.el.trRow5.setDisplay(modeActive("extreme") && player.collapse.unl);
 		tmp.el.trRow6.setDisplay(modeActive("extreme") && player.dc.unl);
 		tmp.el.trRow7.setDisplay(modeActive("extreme") && player.inf.endorsements.gt(0))
+		tmp.el.trRow8.setDisplay(player.pathogens.unl)
 	}
 }
 
@@ -569,7 +572,9 @@ function updateNormalStadiumHTML(){
 		tmp.el[name + "Div"].setTooltip(tmp.inf.stadium.tooltip(name));
 		tmp.el[name + "Div"].setClasses({
 			stadiumChall: true,
-			comp: player.inf.stadium.completions.includes(name)
+			comp: player.inf.stadium.completions.includes(name),
+			"center-h": name=="eternity",
+			"fit-height": name=="eternity"
 		});
 		let active = player.inf.stadium.current == name;
 		let trapped = !active && tmp.inf.stadium.active(name) && !modeActive("extreme");
@@ -581,6 +586,7 @@ function updateNormalStadiumHTML(){
 			locked: player.inf.stadium.current != "" && !(trapped || active),
 			inf: !(trapped || active || player.inf.stadium.current != "")
 		});
+		tmp.el.eterCompChall.setDisplay(tmp.canCompleteStadium)
 		let data = mltRewardActive(1)?MLT_1_STADIUM_REWARDS:STADIUM_REWARDS
 		let showCurrent = data.effects[name] !== undefined;
 		tmp.el[name + "Btm"].setHTML(
@@ -715,16 +721,17 @@ function updateDerivativeHTML(){
 }
 
 function updateAllInfinityHTML(){
+	// The Stadium
+	if ((infTab == "stadium") || (player.tab == "eternity")) {
+		//console.log("asdf")
+		updateNormalStadiumHTML()
+		updateExtremeStadiumHTML()
+	}
 	if (player.tab == "inf") {
 		updateInfinityEndorsementStuffHTML()
 		updateInfinitySubtabHTML()
 		updateAscensionHTML()
 
-		// The Stadium
-		if (infTab == "stadium") {
-			updateNormalStadiumHTML()
-			updateExtremeStadiumHTML()
-		}
 
 		// The Pantheon
 		if (infTab == "pantheon") {
@@ -1619,6 +1626,24 @@ function updateOverallMultiverseHTML() {
 	}
 }
 
+function randomString(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * 
+ charactersLength));
+   }
+   return result;
+}
+
+function updateEternityHTML() {
+	if (player.tab=="eternity") {
+		tmp.el.eterJumble.setTxt('"It seems that this '+randomString(10)+' is much easier yet much harder"')
+		tmp.el.betatabbtn.setDisplay(player.dc.unl)
+	}
+}
+
 function updateHTML() {
 	updateOptionsHTML()
 	updateMainHTML()
@@ -1637,7 +1662,7 @@ function updateHTML() {
 	updateOverallEnergyHTML()
 	updateOverallMultiverseHTML()
 	updateMiscHTML()
-	
+	updateEternityHTML()
 	// Features
 	tmp.el.nextFeature.setTxt(tmp.nf === "none" ? "All Features Unlocked!" : tmp.features[tmp.nf].desc);	
 }

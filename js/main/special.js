@@ -86,7 +86,9 @@ function loadTempFeatures() {
 					return player.distance
 						.max(1)
 						.log10()
-						.div(new ExpantaNum(DC_UNL).mul(tmp.dc ? tmp.dc.lrm : 1).log10());
+						.max(1)
+						.log10()
+						.div(new ExpantaNum(DC_UNL).mul(tmp.dc ? tmp.dc.lrm : 1).log10().log10());
 				} else return player.distance.div(new ExpantaNum(DC_UNL).mul(tmp.dc ? tmp.dc.lrm : 1))
 			}
 		}),
@@ -97,7 +99,7 @@ function loadTempFeatures() {
 			display: formatDistance,
 			reached: function() { return player.inf.unl },
 			progress: function () {
-				if (player.options.featPerc=="logarithm") return player.distance.max(1).log10().div(new ExpantaNum(INF_UNL).log10());
+				if (player.options.featPerc=="logarithm") return player.distance.max(1).log10().max(1).log10().div(new ExpantaNum(INF_UNL).log10().log10());
 				else return player.distance.div(INF_UNL)
 			}
 		}),

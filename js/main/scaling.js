@@ -94,6 +94,8 @@ function getScalingStart(type, name) {
 		if (type=="superscaled") {
 			if (player.elementary.entropy.upgrades.includes(32)) start = start.plus(2);
 		}
+	} else if (name=="rea") {
+		//soon:tm:
 	}
 	if (type!=="atomic") if (Object.values(SCALING_STARTS)[Object.keys(SCALING_STARTS).indexOf(type)+1][name]!==undefined) start = start.min(getScalingStart(Object.keys(SCALING_STARTS)[Object.keys(SCALING_STARTS).indexOf(type)+1], name))
 	return start

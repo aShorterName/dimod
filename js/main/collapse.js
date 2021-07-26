@@ -47,7 +47,7 @@ function hasCollapseMilestone(n) {
 }
 
 function calcCollpaseSCS(){
-	tmp.collapse.sc = new ExpantaNum(LAYER_SC["collapse"]);
+	tmp.collapse.sc = new ExpantaNum(Infinity);
 	if (tmp.pathogens && player.pathogens.unl) tmp.collapse.sc = tmp.collapse.sc.times(tmp.pathogens[9].eff());
 	if (tmp.inf) tmp.collapse.sc = tmp.collapse.sc.times(tmp.inf.asc.perkEff(4));
 }
@@ -76,7 +76,9 @@ function updateTempCollapse() {
 	if (nerfActive("noCadavers")) tmp.collapse.can = false;
 	tmp.collapse.layer = new Layer("collapse", tmp.collapse.can, "normal", true, "collapse", true);
 	tmp.collapse.gain=()=>{
-		return player.distance.max(1).log10().add(1).log10().add(1).log10().max(0).pow(10).mul(getCadaverGainMult()).floor()
+		let g = player.distance.max(1).log10().add(1).log10().add(1).log10().max(0).pow(10).mul(getCadaverGainMult()).floor()
+		if (player.tr.upgrades.includes(38)) g=g.pow(1.5).floor()
+		return g
 	}
 	tmp.collapse.doGain = function () {
 		player.collapse.cadavers = player.collapse.cadavers.plus(tmp.collapse.layer.gain);
@@ -121,7 +123,7 @@ function getCadaverGainMult() {
 	if (tmp.ach[131].has) mult = mult.times(2);
 	if (player.tr.upgrades.includes(14) && !HCCBA("noTRU")) mult = mult.times(tr14Eff()["cd"]);
 	if (tmp.inf) if (tmp.inf.upgs.has("3;2")) mult = mult.times(INF_UPGS.effects["3;2"]()["cadavers"]);
-	if (tmp.collapse) if (modeActive("extreme") && (tmp.collapse.layer.gain.gte(10) || (tmp.clghm && tmp.collapse.layer.gain.gte(5)))) {
+	if (tmp.collapse) if (modeActive("extreme")) {
 		mult = mult.div(2);
 		tmp.clghm = true;
 	}

@@ -339,6 +339,18 @@ function updateTempInfLayer() {
 			} else tmp.inf.layer.reset(false, false);
 		};
 	}
+	if (!tmp.inf.compChall) {
+		tmp.inf.compChall = ()=>{
+			if (tmp.canCompleteStadium) {
+				if (Object.keys(EXTREME_STADIUM_DATA).includes(player.inf.stadium.current) && modeActive("extreme")) {
+					if (!player.extremeStad.includes(player.inf.stadium.current)) player.extremeStad.push(player.inf.stadium.current)
+				} else if (!player.inf.stadium.completions.includes(player.inf.stadium.current))
+					player.inf.stadium.completions.push(player.inf.stadium.current);
+				if (player.inf.stadium.current!="eternity") {tmp.inf.layer.reset(true);} else {tmp.collapse.layer.reset(true)}
+				player.inf.stadium.current = "";
+			}
+		}
+	}
 	if (!tmp.inf.maxEndorse) tmp.inf.maxEndorse = function (keep) {
 		if (player.distance.lt(tmp.inf.req) && tmp.inf.bulk.floor().gt(player.inf.endorsements)) return
 		player.inf.endorsements = player.inf.endorsements.max(tmp.inf.bulk.floor().max(player.inf.endorsements.plus(1)))
@@ -551,8 +563,10 @@ function updateTempStadium() {
 	};
 	if (!tmp.inf.stadium.exit) tmp.inf.stadium.exit = function () {
 		if (player.inf.stadium.current == "") return;
-		player.inf.stadium.current = "";
+		if (player.inf.stadium.current!="eternity") {
 		tmp.inf.layer.reset(true);
+		} else {tmp.collapse.layer.reset(true)}
+		player.inf.stadium.current = "";
 	};
 	if (!tmp.inf.stadium.active) tmp.inf.stadium.active = function (name, rank = 1) {
 		if ((player.inf.pantheon.purge.active||HCCBA("purge")) && name != "reality" && rank == 1) return true;
@@ -588,13 +602,15 @@ function updateTempStadium() {
 		return goal;
 	};
 	tmp.inf.stadium.canComplete =
-		(player.inf.endorsements.gte(15) && !(mltActive(3) && !player.mlt.mlt3selected.includes("stadium"))) &&
+		((player.pathogens.unl || player.inf.endorsements.gte(15)) && !(mltActive(3) && !player.mlt.mlt3selected.includes("stadium"))) &&
 		player.inf.stadium.current != "" &&
 		player.distance.gte(Object.keys(EXTREME_STADIUM_DATA).includes(player.inf.stadium.current)?extremeStadiumGoal(player.inf.stadium.current):tmp.inf.stadium.goal(player.inf.stadium.current));
 	if (!tmp.inf.stadium.start) tmp.inf.stadium.start = function (name) {
 		if (tmp.inf.stadium.active(name)&&!(name=="solaris"&&modeActive("extreme")&&player.inf.stadium.current!=name)) return;
 		if (player.inf.stadium.current != "") return;
-		tmp.inf.layer.reset(true);
+		if (name != "eternity") {tmp.inf.layer.reset(true)} else {
+			tmp.collapse.layer.reset(true)
+		}
 		player.inf.stadium.current = name;
 	};
 	if (!tmp.inf.stadium.tooltip) tmp.inf.stadium.tooltip = function (name) {

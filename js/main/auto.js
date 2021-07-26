@@ -303,6 +303,15 @@ function multivAutoTick() {
 	}
 }
 
+function modAutoTick() {
+	if (player.automators["rocket eternal accelerator"]) {
+		if (tmp.rea.layer.avail) {
+			//console.log("AAAAAAAAAAAAAAAAAA")
+			tmp.rea.layer.reset(false, true)
+		}
+	}
+}
+
 function autoTick(diff) {
 	normalAutoTick(diff)
 	furnaceAutoTick()
@@ -328,6 +337,7 @@ function autoTick(diff) {
 	multivAutoTick()
 	magmaAutoTick()
 	plasmaAutoTick()
+	modAutoTick()
 }
 
 function autoPerSec() {

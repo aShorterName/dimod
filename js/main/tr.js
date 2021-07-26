@@ -89,10 +89,18 @@ function tr9Eff() {
 	return ExpantaNum.div(5, (tmp.auto ? tmp.auto.tierbot.interval.max(1e-10) : 1)).pow(getTR89Mod().div(5)).max(1)
 }
 
+function tr10Base() {
+	if (player.tr.upgrades.includes(37)) {
+		return ExpantaNum.pow(1.1, tr2Pow())
+	} else {
+		return new ExpantaNum(1.1)
+	}
+}
+
 function tr10Eff() {
 	let cubes = player.tr.cubes
 	//if (cubes.gte(1e10)) cubes = cubes.pow(0.1).times(1e9)
-	return ExpantaNum.pow(1.1, cubes.plus(1).log10())
+	return ExpantaNum.pow(tr10Base(), cubes.plus(1).log10())
 }
 
 function tr11Pow() {
