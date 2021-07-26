@@ -144,6 +144,11 @@
 								Pathogens
 							</button>
 						</td>
+						<td>
+							<button id="eternitytabbtn" class="btn tb rainbow main" onclick="showTab('eternity')">
+								Eternity
+							</button>
+						</td>
 						<td><button id="dctabbtn" class="btn tb dark main" onclick="showTab('dc')">Dark Circle</button></td>
 						<td><button id="inftabbtn" class="btn tb inf main" onclick="showTab('inf')">Infinity</button></td>
 						<td>
@@ -937,6 +942,61 @@
 			<div id="pthUpgs"></div>
 			<br /><br />
 		</div>
+		<div id="eternity" class="tab" style="display:none">
+			<tr>
+				<td>
+					<button id="alphatabbtn" class="btn tb rainbow main" onclick="tmp.eter.showTab('alpha')">
+						Alpha
+					</button>
+				</td>
+				<td>
+					<button id="betatabbtn" class="btn tb rainbow main" onclick="tmp.eter.showTab('beta')">
+						Beta
+					</button>
+				</td>
+			</tr><br><br>
+			<div id="alpha" class="eterTab">
+				<div class="rainbowColor">"It seems that something is wrong."</div><br /><br />
+				<div class="rainbowColor" id="eterJumble">"This HFGSJgHFhh seems much easier yet much harder."</div><br /><br />
+				<b>Eternity</b> pauses for a moment.<br /><br /><br />
+				<div class="rainbowColor">
+				"It's like some <b>being</b> higher than <b>Us</b> changed this."<br /><br /><br /></div>
+				<b>Eternity</b> notices you in the local meta-void beyond universes.<br /><br /><br /><div class="rainbowColor dimBlue">
+				"I should have known you'd be here."<br /><br /><br />
+				</div>
+				<button class="btn inf" onclick="tmp.inf.compChall()" id="eterCompChall">Complete this Stadium challenge.</button><br /><br />
+				<button class="btn inf" onclick="tmp.inf.stadium.exit()">Exit Stadium challenge</button><br /><br />
+				<div id="eternityDiv" class="stadiumChall center-h fit-height" tooltip="Difficulty level 1">
+					<div class="rainbowColor dimBlue">Eternity</div><br /><button
+						id="eternityChall"
+						class="btn inf fit-width"
+						onclick="tmp.inf.stadium.start('eternity')"
+					>
+						Start</button>
+					<p id="eternityBtm" class="stadiumDesc">
+					Goal: todo<br>
+					Reward: Ranks boost Time Speed and Rocket eternal amplifiers are automatically bought.
+					</p>
+				</div><br /><br /><br />
+				<div class="rainbowColor">"Don't worry, you'll only lose your rockets and time cubes."</div>
+			</div>
+			<div id="beta" class="eterTab" style="display:none">
+				<div class="rainbowColor">
+				"You got past the big wall."<br /><br /><br />
+				"I don't think some of these blueprints of your cubic tachyon machines were here before."</div><br /><br /><br />
+				<p>"What do you mean before?"</p><br /><br /><br />
+				<div class="rainbowColor">
+				"I don't experience time as you do."<br /><br /><br />
+				"This time is a separate temporal dimension for me."<br /><br /><br />
+				"That is why you see me as temporally slower and faster, and why I am not affected by your time rate."
+				</div><br /><br /><br />
+				<p>"Are you influencing the <b>timeline</b>? Because I'm quite sure I always had these instructions."</p><br /><br /><br />
+				<div class="rainbowColor">
+				"No, I think some <b>entity</b> is creating those."<br /><br /><br />
+				"We'll talk more when you meet the others."
+				</div>
+			</div>
+		</div>
 		<div id="dc" class="tab" style="display: none;">
 			Dark Flow: <span id="darkFlow" style="font-weight: bold;"></span>x<br />
 			<table>
@@ -1171,15 +1231,6 @@
 							>
 								Start</button
 							><br /><br /><span id="infinityBtm" class="stadiumDesc"></span>
-						</td>
-						<td id="eternityDiv" class="stadiumChall" tooltip="Eternity Challenge Description">
-							<div class="eternity">Eternity</div><br /><button
-								id="eternityChall"
-								class="btn locked"
-								onclick="tmp.inf.stadium.start('eternity')"
-							>
-								Start</button
-							><br /><br /><span id="eternityBtm" class="stadiumDesc"></span>
 						</td>
 						<td id="realityDiv" class="stadiumChall" tooltip="Reality Challenge Description">
 							<div class="reality">Reality</div><br /><button
@@ -2465,4 +2516,5 @@
 	
 	<!-- MOD STUFF -->
 	<script type="text/javascript" src="js/main/rea.js"></script>
+	<script type="text/javascript" src="js/main/eter.js"></script>
 </body>

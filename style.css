@@ -2597,7 +2597,7 @@ table {
 	animation-iteration-count: infinite;
 	animation-delay: 0s;
 	animation-duration: 5s;
-	background-color: #ff0000 !important;
+	background-color: #ff0000;
 }
 .rainbowColor {
 	animation-name: rainbow;
@@ -2605,8 +2605,20 @@ table {
 	animation-iteration-count: infinite;
 	animation-delay: 0s;
 	animation-duration: 5s;
-	color: hsl(180, 100%, 50%) !important;
+	color: hsl(180, 100%, 50%);
 }
 .strikeThrough {
 	text-decoration: line-through;
+}
+.center-h {
+	margin: auto;
+}
+.fit-width {
+	width: 100%
+}
+.fit-height {
+	height: 100%;
+}
+.dimBlue {
+	color: #006666
 }
